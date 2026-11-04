@@ -13,6 +13,16 @@ touches Salesforce, logging every action to a tamper-evident audit trail.
 
 ![Review dashboard](docs/dashboard.png)
 
+**What's in it**
+
+- **Deterministic scanners** for duplicates, missing fields, stale records and invalid formats (no LLM, tested against seeded ground truth)
+- **Claude agent** that explains each finding and proposes a merge, a field update or a flag for the owner, using read-only tools
+- **Human-in-the-loop queue** with a FastAPI + HTMX dashboard; `sfdq apply` (with `--dry-run`) is the only thing that writes, and every action lands in a hash-chained audit log
+- **[MCP server](#mcp-server-drive-sfdq-from-claude-desktop-or-any-mcp-client)** so Claude Desktop (or any MCP client) can scan, propose and review conversationally, and still can't apply
+- **[Eval harness](#eval-harness-does-the-agent-actually-fix-things-correctly)** (`sfdq eval`) that scores the agent's proposals against labeled expected fixes: precision/recall per issue type, restraint, unsafe auto-fixes
+- **[Deployable demo](#live-demo)**: a Dockerfile and Render blueprint serving the dashboard on mock data with sample data preloaded
+- **Mock mode by default**: fake org, canned LLM, 259 offline tests; real Salesforce / Claude activate only with credentials
+
 ## Quickstart (mock mode: no Salesforce org, no API key)
 
 ```bash
@@ -27,17 +37,17 @@ Then approve a few fixes in the dashboard and run `sfdq apply --dry-run` (see ex
 ## How it works
 
 ```mermaid
-flowchart LR
-    SF[("Salesforce<br/>(or mock org)")] -- read only --> SC["Scanners<br/>deterministic Python"]
+flowchart TB
+    SF[("Salesforce<br/>or mock org")] -- "read only" --> SC["Scanners<br/>deterministic Python"]
     SC -- findings --> DB[("SQLite<br/>findings · fix queue · audit log")]
-    DB --> AG["Agent: Claude + tools<br/>(read-only lookups)"]
-    SF -. "read-only lookups" .-> AG
-    AG -- "proposals, validated by<br/>the write policy" --> DB
-    DB --> UI["Review dashboard<br/>FastAPI + HTMX"]
-    UI -- "approve / reject" --> DB
-    DB -- "approved only" --> AP["sfdq apply [--dry-run]"]
-    AP -- "re-check policy ·<br/>detect edits since proposal" --> SF
-    AP -- "every outcome" --> DB
+    DB --> AG["Agent: Claude + read-only tools<br/>validated by the write policy"]
+    AG -- proposals --> DB
+    DB <-- "approve / reject" --> UI["Review dashboard<br/>FastAPI + HTMX"]
+    MCP["MCP server<br/>Claude Desktop or any MCP client"] -- "scan · propose · list · approve · reject<br/>(no apply tool)" --> DB
+    DB -- "approved only" --> AP["sfdq apply --dry-run<br/>CLI only, human-run"]
+    AP -- "re-check policy · detect edits<br/>then write" --> SF
+    EV["sfdq eval<br/>labeled expected fixes"] -. "scores proposals" .-> AG
+    DEMO["Docker + Render<br/>public demo on mock data"] -. serves .-> UI
 ```
 
 | Stage | Command | What happens | LLM? | Writes to Salesforce? |
@@ -46,6 +56,9 @@ flowchart LR
 | Propose | `sfdq propose` | Claude explains each finding and proposes **merge**, **update field** or **flag for owner review** | Yes | No |
 | Review | `sfdq review` | Dashboard shows before/after values; a human approves or rejects | No | No |
 | Apply | `sfdq apply [--dry-run]` | Applies **approved** proposals only | No | **Yes**, only here |
+| Drive from an AI client | `sfdq mcp` | MCP server with scan / propose / list / approve / reject tools (no apply) | Via `propose_fix` | No |
+| Evaluate | `sfdq eval` | Scores the agent against labeled expected fixes, writes a report | Yes | No |
+| Demo | `sfdq seed-demo`, Docker | Preloads sample data; the Docker image serves the dashboard | Mock only | No |
 
 **The four scanners** (all configurable per object in [`quality_rules.yaml`](src/sfdq/config/quality_rules.yaml)):
 
@@ -281,12 +294,18 @@ src/sfdq/
   scanners/     duplicates.py · missing_fields.py · stale.py · formats.py   (deterministic, no LLM)
   agent/        llm.py (Claude client) · mock_llm.py · tools.py · prompts.py · proposer.py (the loop)
   queue/        store.py (SQLite queue) · audit.py (hash chain) · applier.py (the only writer)
-  salesforce/   base.py (protocol) · real.py · mock.py · mock_data.py (seeded org generator)
+  salesforce/   base.py (protocol) · real.py · mock.py · mock_data.py (seeded org + ground truth) · readonly.py
+  eval/         labels.py · metrics.py · runner.py · report.py · data/expected_fixes.json
   web/          app.py (FastAPI) · templates/ + static/ (HTMX, vendored, no CDN, no build step)
+  mcp_server.py MCP server (official Python SDK); never imports the apply engine
+  demo.py       sample-data seeding for the container / public demo
+  runtime.py    shared wiring (settings, rules, queue, clients) for the CLI, MCP server and eval
   policy.py     write policy shared by the agent and the applier
   config/quality_rules.yaml   per-object rules, thresholds, writable fields
-  cli.py        sfdq scan | propose | review | apply | status | audit | reset-demo
-tests/          199 tests: scanners vs ground truth, queue/audit/apply safety, agent loop, web, e2e
+  cli.py        sfdq scan | propose | review | apply | mcp | eval | status | audit | seed-demo | reset-demo
+Dockerfile · docker/entrypoint.sh · render.yaml · .dockerignore    deployable demo
+tests/          259 tests: scanners vs ground truth, queue/audit/apply safety, agent loop, web, MCP, eval, demo, e2e
+docs/           dashboard screenshot, sample eval report
 ```
 
 ## Development
@@ -310,6 +329,12 @@ dashboard through scan → propose → approve → `apply --dry-run` → apply �
   (`executeAnonymous`) because the REST API has no merge verb.
 - The dashboard has **no authentication** and binds to localhost by default; put it behind a proxy with auth before
   sharing it. Reviewer identity is taken from `SFDQ_REVIEWER`/OS user, not a login.
+- **MCP**: tested with the official MCP Python client in-process and over a real stdio subprocess, but not inside the
+  Claude Desktop app. Approving over MCP is as trustworthy as the human in the chat (see the MCP section).
+- **Eval**: the numbers above are for the canned mock agent only; I have not run the eval against real Claude. The mock
+  was written with these problem types in mind, so treat its scores as a pipeline/regression baseline.
+- **Demo**: the Docker image is built and smoke-tested locally and in CI; it has not been deployed to Render, so
+  `render.yaml` is unverified against Render itself. The public demo has no login by design (fake data only).
 - Merging only fills **blank** fields on the survivor (the agent is instructed to, and the write policy limits edits to
   the survivor); other differences are resolved in favour of the survivor.
 - Scale: duplicate detection uses blocking (shared domain / phone / email / name-token prefix) to stay near-linear, and
@@ -321,6 +346,9 @@ dashboard through scan → propose → approve → `apply --dry-run` → apply �
 - **Slack approvals**: post a proposal with Approve / Reject buttons to the record owner's channel
 - **Scheduled scans** (cron / GitHub Actions) that open only *new* findings and report drift over time
 - Batch API for large `propose` runs, and a spend cap per run
+- Run `sfdq eval` against real Claude on a schedule and track precision / unsafe-fix regressions over time; add harder
+  and noisier labeled cases (typos in names, conflicting phone numbers)
+- Authenticated HTTP transport (OAuth) for the MCP server so it can be shared safely
 - Per-field approval for multi-field proposals; SSO for the dashboard
 - Confidence calibration: track approval rates per confidence level to tune the agent and thresholds
 

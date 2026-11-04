@@ -79,7 +79,6 @@ class Rules(_Strict):
 
     stale: StaleRules = Field(default_factory=StaleRules)
     missing_fields: dict[str, MissingFieldRules] = Field(default_factory=dict)
-    default_country: str = "US"
     invalid_formats: dict[str, list[FormatRule]] = Field(default_factory=dict)
     duplicates: DuplicateRules
     writable_fields: dict[str, list[str]] = Field(default_factory=dict)

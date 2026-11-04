@@ -17,8 +17,8 @@ missing_fields:
 
 # --- Invalid formats -----------------------------------------------------------------------
 # type: email | phone | postal_code. For postal codes, country_field says which field holds the
-# country so the right pattern is used (blank country falls back to default_country).
-default_country: US
+# country so the right pattern is used. A blank country is accepted if the code is valid in ANY
+# supported country (US, CA, GB, DE, FR, AU), so a gap in one field never causes a false alarm.
 invalid_formats:
   Account:
     - { field: Phone, type: phone }

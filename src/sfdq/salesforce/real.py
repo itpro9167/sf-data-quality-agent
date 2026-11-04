@@ -11,7 +11,7 @@ import re
 from collections.abc import Mapping, Sequence
 from typing import Any
 
-from simple_salesforce import Salesforce
+from simple_salesforce.api import Salesforce
 from simple_salesforce.exceptions import SalesforceError as _SimpleSalesforceError
 from simple_salesforce.exceptions import SalesforceResourceNotFound
 

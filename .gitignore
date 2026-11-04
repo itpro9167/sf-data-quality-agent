@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Secrets and local state -- never commit these
+.env
+.env.*
+!.env.example
+.sfdq/
+*.db
+*.sqlite

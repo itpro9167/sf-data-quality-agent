@@ -1,0 +1,16 @@
+# Render Blueprint: one web service running the sfdq dashboard in mock mode with sample data.
+# Deploy: Render dashboard -> New + -> Blueprint -> pick this repository (or use the "Deploy to
+# Render" button in the README). Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: sfdq-demo
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      - key: SFDQ_MODE
+        value: mock
+      - key: SFDQ_PUBLIC_DEMO
+        value: "1"

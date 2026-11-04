@@ -82,6 +82,40 @@ And a judgment call, where the agent restores a lost leading zero but marks it *
 > The billing postal code stored for 'Aspen Brewing Co' is '2108', which isn't a valid postal code. MA ZIP
 > codes begin with 0, and spreadsheet imports often drop it, so I restored it. Worth a quick look.
 
+## Live demo
+
+> **Live demo:** _not deployed yet._ After you deploy (below), replace this line with your URL, for example
+> `https://sfdq-demo.onrender.com`.
+
+The demo is the review dashboard running in **mock mode with sample data preloaded** (232 pending proposals on a fake org).
+It is safe to expose: a visitor can approve, reject and undo, but nothing can reach Salesforce (there is no shell to run
+`sfdq apply`, and there are no credentials). The queue is shared by all visitors, and a **Reset demo data** button restores it.
+`SFDQ_PUBLIC_DEMO=1` makes sfdq refuse to start if real credentials are present, since the dashboard has no login.
+
+**Deploy to Render (free plan):**
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/itpro9167/sf-data-quality-agent)
+
+1. Click the button, or in the Render dashboard choose **New + → Blueprint** and pick this repository. Render reads
+   [`render.yaml`](render.yaml) and builds the [`Dockerfile`](Dockerfile).
+2. Wait for the build (a few minutes). The service `sfdq-demo` gets a URL like `https://sfdq-demo.onrender.com`.
+3. Paste that URL into the "Live demo" line above.
+
+Free instances spin down after about 15 minutes idle (the next visit takes ~30-60 s to wake) and the disk is ephemeral, so the
+demo resets whenever the service restarts or redeploys.
+
+**Run the same image locally:**
+
+```bash
+docker build -t sfdq-demo .
+docker run --rm -p 8000:8000 sfdq-demo      # open http://localhost:8000
+# if Docker Hub rate-limits you:  --build-arg PYTHON_IMAGE=mirror.gcr.io/library/python:3.12-slim
+```
+
+I built and ran this image locally (sample data seeds on first start, the dashboard serves, the container runs as a
+non-root user, Docker's health check reports healthy, and a restart does not re-seed), and CI builds and smoke-tests it on every
+push. I have **not deployed it to Render**, so `render.yaml` is validated against my tests but not against Render itself.
+
 ## MCP server: drive sfdq from Claude Desktop (or any MCP client)
 
 `sfdq mcp` runs a [Model Context Protocol](https://modelcontextprotocol.io) server (built on the official

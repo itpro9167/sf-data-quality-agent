@@ -39,3 +39,28 @@ jobs:
         env:
           SFDQ_MODE: mock
         run: pytest
+
+  docker:
+    name: docker demo image
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the demo image
+        run: docker build -t sfdq-demo .
+
+      - name: Smoke-test the container (seeds sample data, serves the dashboard, runs non-root)
+        run: |
+          docker run -d --name demo -p 8000:8000 sfdq-demo
+          for i in $(seq 1 60); do
+            curl -fs http://localhost:8000/healthz > /dev/null && break
+            sleep 1
+          done
+          curl -fs http://localhost:8000/healthz | grep -q '"pending":232'
+          curl -fs http://localhost:8000/ | grep -q "Public demo"
+          test "$(docker exec demo id -u)" != "0"
+
+      - name: Container logs (on failure)
+        if: failure()
+        run: docker logs demo || true

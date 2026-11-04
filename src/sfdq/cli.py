@@ -189,7 +189,9 @@ def review(
     from sfdq.web.app import create_app
 
     rt = _runtime()
-    if host not in ("127.0.0.1", "localhost", "::1"):
+    if rt.settings.public_demo:
+        console.print("[dim]Public demo mode: mock data only, shared by every visitor.[/]")
+    elif host not in ("127.0.0.1", "localhost", "::1"):
         err.print(
             "[yellow]warning:[/] the dashboard has no authentication; "
             f"binding to {host} exposes the review queue to your network."
@@ -454,6 +456,31 @@ def audit(
             f"[bold red]Hash chain BROKEN at entry #{chain.first_bad_id}: the log was altered.[/]"
         )
         raise typer.Exit(1)
+
+
+@app.command("seed-demo")
+def seed_demo_cmd(
+    force: Annotated[
+        bool, typer.Option("--force", help="Wipe existing demo state and start over.")
+    ] = False,
+) -> None:
+    """Prepare sample data for the dashboard: scan the mock org and queue proposals (idempotent)."""
+    from sfdq.demo import seed_demo
+
+    rt = _runtime()
+    try:
+        summary = seed_demo(rt.settings, rt.rules, force=force)
+    except ConfigError as exc:
+        _die(str(exc))
+    if summary.seeded:
+        console.print(
+            f"Demo seeded: {summary.findings} findings, {summary.pending} pending proposals."
+        )
+    else:
+        console.print(
+            f"Demo data already present ({summary.findings} findings, {summary.pending} pending). "
+            "Use --force to start over."
+        )
 
 
 @app.command("reset-demo")

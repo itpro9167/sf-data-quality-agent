@@ -7,6 +7,10 @@ Mock mode is the default. A component goes "real" only when its credentials are 
 
 ``SFDQ_MODE=mock`` forces both to mock even if credentials exist; ``SFDQ_MODE=real`` demands both
 and fails loudly if any are missing.
+
+``SFDQ_PUBLIC_DEMO=1`` marks a publicly hosted demo (see the Dockerfile). The dashboard is
+unauthenticated, so this mode is only allowed with mock data: it refuses to start if real
+credentials are present.
 """
 
 from __future__ import annotations
@@ -52,6 +56,7 @@ class Settings:
     rules_path: Path | None = None
     salesforce: SalesforceCredentials | None = None
     anthropic_api_key: str | None = field(default=None, repr=False)  # never log secrets
+    public_demo: bool = False
 
     @property
     def db_path(self) -> Path:
@@ -99,6 +104,12 @@ def load_settings(env: Mapping[str, str] | None = None) -> Settings:
         if missing:
             raise ConfigError("SFDQ_MODE=real but missing: " + ", ".join(missing))
 
+    public_demo = get("SFDQ_PUBLIC_DEMO").lower() in ("1", "true", "yes", "on")
+    if public_demo and forced != "mock" and (sf_creds is not None or api_key is not None):
+        raise ConfigError(
+            "SFDQ_PUBLIC_DEMO=1 serves an unauthenticated dashboard, so it only runs on mock data: "
+            "unset the SF_* / ANTHROPIC_API_KEY credentials or set SFDQ_MODE=mock"
+        )
     use_mock = forced == "mock"
     home = Path(get("SFDQ_HOME") or ".sfdq").expanduser()
     return Settings(
@@ -110,6 +121,7 @@ def load_settings(env: Mapping[str, str] | None = None) -> Settings:
         rules_path=Path(get("SFDQ_RULES")).expanduser() if get("SFDQ_RULES") else None,
         salesforce=None if use_mock else sf_creds,
         anthropic_api_key=None if use_mock else api_key,
+        public_demo=public_demo,
     )
 
 

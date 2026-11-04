@@ -7,13 +7,11 @@ runs against the built-in fake org and canned "LLM", so the whole pipeline works
 from __future__ import annotations
 
 import sys
-from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 from typing import Annotated, NoReturn
 
 import typer
-from dotenv import load_dotenv
 from rich.console import Console
 from rich.table import Table
 
@@ -21,13 +19,13 @@ from sfdq import __version__
 from sfdq.agent import FixProposer, LLMFatalError, build_llm_client, propose_all
 from sfdq.models import Finding, FindingKind, ProposalDraft
 from sfdq.policy import WritePolicy
-from sfdq.queue import Applier, Outcome, QueueStore
-from sfdq.rules import Rules, RulesError, load_rules
+from sfdq.queue import Applier, Outcome
+from sfdq.rules import RulesError
+from sfdq.runtime import Runtime, build_runtime
 from sfdq.salesforce.base import SalesforceClient, SalesforceError
-from sfdq.salesforce.factory import build_salesforce_client
 from sfdq.salesforce.mock import MockSalesforceClient
 from sfdq.scanners import run_scan
-from sfdq.settings import ConfigError, Settings, load_settings
+from sfdq.settings import ConfigError
 
 app = typer.Typer(
     name="sfdq",
@@ -49,36 +47,26 @@ RulesOption = Annotated[
 ]
 
 
-@dataclass
-class Runtime:
-    """Wired-up dependencies for one CLI invocation."""
-
-    settings: Settings
-    rules: Rules
-    store: QueueStore
-
-    def salesforce(self) -> SalesforceClient:
-        """Connect to Salesforce (or load the mock org)."""
-        try:
-            return build_salesforce_client(self.settings)
-        except SalesforceError as exc:
-            _die(str(exc))
-
-
 def _die(message: str, code: int = 1) -> NoReturn:
     err.print(f"[bold red]error:[/] {message}")
     raise typer.Exit(code)
 
 
-def _runtime(rules_path: Path | None = None) -> Runtime:
-    load_dotenv()  # optional .env for real-mode credentials; never required
+def _runtime(rules_path: Path | None = None, *, banner: bool = True) -> Runtime:
     try:
-        settings = load_settings()
-        rules = load_rules(rules_path or settings.rules_path)
+        rt = build_runtime(rules_path)
     except (ConfigError, RulesError) as exc:
         _die(str(exc))
-    console.print(f"[dim]{settings.describe()}[/]")
-    return Runtime(settings, rules, QueueStore(settings.db_path))
+    if banner:
+        console.print(f"[dim]{rt.settings.describe()}[/]")
+    return rt
+
+
+def _salesforce(rt: Runtime) -> SalesforceClient:
+    try:
+        return rt.salesforce()
+    except SalesforceError as exc:
+        _die(str(exc))
 
 
 def _actor(rt: Runtime) -> str:
@@ -106,7 +94,7 @@ def scan(
 ) -> None:
     """Run the deterministic scanners (no LLM) and save findings to the queue database."""
     rt = _runtime(rules)
-    sf = rt.salesforce()
+    sf = _salesforce(rt)
     report = run_scan(sf, rt.rules, as_of=date.today(), kinds=kind)
     diff = rt.store.record_scan(report.findings, _actor(rt), kinds=kind)
 
@@ -159,7 +147,7 @@ def propose(
             "Continue? (tip: --limit N to try a few first)",
             abort=True,
         )
-    proposer = FixProposer(llm, rt.salesforce(), rt.rules, WritePolicy(rt.rules))
+    proposer = FixProposer(llm, _salesforce(rt), rt.rules, WritePolicy(rt.rules))
 
     def show_progress(f: Finding, d: ProposalDraft) -> None:
         marker = "[yellow]fallback[/]" if d.source == "fallback" else d.action.value
@@ -210,6 +198,28 @@ def review(
 
 
 # --------------------------------------------------------------------------------------------
+# mcp
+# --------------------------------------------------------------------------------------------
+@app.command("mcp")
+def mcp_server(
+    transport: Annotated[
+        str, typer.Option(help="'stdio' (Claude Desktop, IDEs) or 'streamable-http'.")
+    ] = "stdio",
+    host: Annotated[
+        str, typer.Option(help="HTTP transport only. No auth: keep localhost.")
+    ] = "127.0.0.1",
+    port: Annotated[int, typer.Option(help="HTTP transport only.")] = 8765,
+) -> None:
+    """Run the MCP server so an AI client can scan, propose and review. It can never apply."""
+    if transport not in ("stdio", "streamable-http"):
+        _die("--transport must be 'stdio' or 'streamable-http'")
+    from sfdq.mcp_server import main as run_mcp
+
+    # stdout is the MCP protocol channel on stdio: the server logs to stderr only.
+    run_mcp(transport, host, port)
+
+
+# --------------------------------------------------------------------------------------------
 # apply
 # --------------------------------------------------------------------------------------------
 @app.command()
@@ -233,7 +243,7 @@ def apply(
     if not ready:
         console.print("Nothing to apply: no approved proposals are waiting.")
         return
-    sf = rt.salesforce()
+    sf = _salesforce(rt)
     if not dry_run and not yes:
         target = "LIVE Salesforce org" if rt.settings.salesforce_mode == "real" else "mock org"
         typer.confirm(f"Apply {len(ready)} approved proposal(s) to the {target}?", abort=True)

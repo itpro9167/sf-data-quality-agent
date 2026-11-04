@@ -82,6 +82,59 @@ And a judgment call, where the agent restores a lost leading zero but marks it *
 > The billing postal code stored for 'Aspen Brewing Co' is '2108', which isn't a valid postal code. MA ZIP
 > codes begin with 0, and spreadsheet imports often drop it, so I restored it. Worth a quick look.
 
+## MCP server: drive sfdq from Claude Desktop (or any MCP client)
+
+`sfdq mcp` runs a [Model Context Protocol](https://modelcontextprotocol.io) server (built on the official
+Python MCP SDK) so an AI client can scan, propose and review conversationally. It works in mock mode out of the box.
+
+| Tool | What it does | Changes Salesforce? |
+|---|---|---|
+| `run_scan` | Run the deterministic scanners, save findings | No (reads only) |
+| `list_findings` | Page through findings, filter by issue type / object / has-a-proposal | No |
+| `propose_fix` | Have the agent propose a fix for one finding (queued as `pending`) | No |
+| `list_pending_fixes` | Proposals awaiting review, with explanation and before/after values | No |
+| `approve_fix` | Mark a proposal approved. Requires `confirm=true` | **No**, only flips a queue row |
+| `reject_fix` | Mark a proposal rejected | No |
+
+**There is deliberately no `apply` tool.** Applying approved fixes stays a human action on the CLI
+(`sfdq apply --dry-run`, then `sfdq apply`). This is structural rather than a convention: the scanners and the agent
+inside the server only ever receive a `ReadOnlySalesforceClient` that raises on every write, and the server module never
+imports the apply engine (both are covered by tests). Approvals made over MCP are recorded in the audit log as
+`mcp:<reviewer>`, and `approve_fix` refuses unless the client passes `confirm=true`, which its instructions say to do
+only after the human has explicitly asked. That makes the human gate only as strong as the human in the chat, so
+review in the dashboard if you want a stricter workflow.
+
+**Claude Desktop config** (Settings → Developer → Edit Config, i.e. `claude_desktop_config.json`; restart Claude
+Desktop afterwards). Use absolute paths to the `sfdq` executable of the virtualenv where you ran `pip install -e .`:
+
+```json
+{
+  "mcpServers": {
+    "sfdq": {
+      "command": "/absolute/path/to/sf-data-quality-agent/.venv/bin/sfdq",
+      "args": ["mcp"],
+      "env": {
+        "SFDQ_MODE": "mock",
+        "SFDQ_HOME": "/absolute/path/to/sf-data-quality-agent/.sfdq"
+      }
+    }
+  }
+}
+```
+
+On Windows use `"command": "C:\\path\\to\\sf-data-quality-agent\\.venv\\Scripts\\sfdq.exe"`. If the executable is not
+found, `"command": "<venv python>", "args": ["-m", "sfdq.cli", "mcp"]` is equivalent, and `sfdq-mcp` is an alias entry point.
+Point `SFDQ_HOME` at the same folder you use for the CLI and dashboard so they share one queue. To use real services, add
+`ANTHROPIC_API_KEY` and/or the `SF_*` variables to `env` instead of `SFDQ_MODE`.
+
+Then try: *"Scan our Salesforce for data-quality problems, show me the five most likely duplicate accounts, propose a
+fix for the top one, and tell me what you'd change."* followed by *"Approve it."* The fix is then applied from your
+terminal with `sfdq apply --dry-run` and `sfdq apply`. An HTTP transport is available with
+`sfdq mcp --transport streamable-http` (no authentication; localhost only by default).
+
+I tested the server with the official MCP Python client over both an in-process connection and a real stdio subprocess,
+but not inside the Claude Desktop app itself.
+
 ## Design decisions
 
 **Deterministic scanners + LLM reasoning.** Finding problems is a precision/recall exercise that must be

@@ -14,7 +14,7 @@ from __future__ import annotations
 import getpass
 import os
 from collections.abc import Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Literal
 
@@ -51,7 +51,7 @@ class Settings:
     reviewer: str
     rules_path: Path | None = None
     salesforce: SalesforceCredentials | None = None
-    anthropic_api_key: str | None = None
+    anthropic_api_key: str | None = field(default=None, repr=False)  # never log secrets
 
     @property
     def db_path(self) -> Path:

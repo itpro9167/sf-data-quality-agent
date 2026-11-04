@@ -1,0 +1,6 @@
+<section id="counts" class="counts" {% if oob %}hx-swap-oob="true"{% endif %}>
+  <div class="stat pending"><b>{{ counts.pending }}</b><span>Pending review</span></div>
+  <div class="stat approved"><b>{{ counts.awaiting_apply }}</b><span>Approved, awaiting apply</span></div>
+  <div class="stat applied"><b>{{ counts.applied }}</b><span>Applied</span></div>
+  <div class="stat rejected"><b>{{ counts.rejected }}</b><span>Rejected</span></div>
+</section>

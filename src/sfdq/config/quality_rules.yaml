@@ -1,0 +1,55 @@
+# sfdq quality rules. Everything the deterministic scanners (and the write policy) need is here,
+# keyed per Salesforce object so adding Lead/Opportunity later is a config change, not a rewrite.
+# Point sfdq at a different file with --rules or SFDQ_RULES.
+
+# --- Stale records -------------------------------------------------------------------------
+# A record is stale when BOTH its last activity and its last modification are older than this.
+stale:
+  months: 12
+
+# --- Missing key fields --------------------------------------------------------------------
+# A field counts as missing when it is null or whitespace-only.
+missing_fields:
+  Account:
+    required: [Industry, Phone, Website, BillingCountry]
+  Contact:
+    required: [Email, AccountId, Title]
+
+# --- Invalid formats -----------------------------------------------------------------------
+# type: email | phone | postal_code. For postal codes, country_field says which field holds the
+# country so the right pattern is used. A blank country is accepted if the code is valid in ANY
+# supported country (US, CA, GB, DE, FR, AU), so a gap in one field never causes a false alarm.
+invalid_formats:
+  Account:
+    - { field: Phone, type: phone }
+    - { field: BillingPostalCode, type: postal_code, country_field: BillingCountry }
+  Contact:
+    - { field: Email, type: email }
+    - { field: Phone, type: phone }
+    - { field: MobilePhone, type: phone }
+    - { field: MailingPostalCode, type: postal_code, country_field: MailingCountry }
+
+# --- Likely duplicates ---------------------------------------------------------------------
+# Each signal contributes an independent probability that the two records are the same entity;
+# they are combined with noisy-OR:  confidence = 1 - prod(1 - p_i).
+# Name similarity ramps linearly from 0 at `floor` to `max` at a perfect match.
+duplicates:
+  min_confidence: 0.70
+  max_block_size: 300 # skip name-token blocks larger than this (keeps matching ~linear)
+  Account:
+    name: { floor: 0.80, max: 0.80 }
+    domain: 0.85 # same website domain
+    phone: 0.60 # same last-10 digits
+    postal: 0.10 # same postal code (weak; only counts alongside another signal)
+  Contact:
+    email: 0.95 # same email address (case-insensitive)
+    name: { floor: 0.80, max: 0.60 } # capped: lots of people share a name
+    phone: 0.50
+    same_account: 0.35 # only counts when the names also look alike
+
+# --- Write policy --------------------------------------------------------------------------
+# The ONLY fields a proposal may change. Anything else (OwnerId, AccountId, Id, ...) is rejected
+# when the agent proposes it AND again at apply time. Defense in depth against bad model output.
+writable_fields:
+  Account: [Name, Phone, Website, Industry, BillingPostalCode, BillingCountry, Description]
+  Contact: [FirstName, LastName, Email, Phone, MobilePhone, Title, MailingPostalCode, MailingCountry]

@@ -1,0 +1,83 @@
+{% set p = v.p %}
+<article class="card state-{{ v.state }}" id="proposal-{{ p.id }}">
+  <header>
+    <span class="id">#{{ p.id }}</span>
+    <span class="badge kind-{{ p.finding.kind.value }}">{{ v.kind_label }}</span>
+    <span class="badge obj">{{ p.finding.object_type }}</span>
+    <span class="spacer"></span>
+    <span class="badge conf-{{ p.confidence.value }}" title="The agent's own confidence in this proposal">{{ p.confidence.value }} confidence</span>
+    <span class="badge pill pill-{{ v.state }}">{{ v.state }}</span>
+  </header>
+
+  {% if v.error %}<div class="flash error" role="alert">{{ v.error }}</div>{% endif %}
+
+  <p class="finding"><span class="lbl">Scanner found</span> {{ p.finding.summary }}</p>
+
+  <section class="explain">
+    <h4>Why this matters <small>{{ 'Claude' if p.source == 'claude' else p.source }} &middot; {{ p.model }}</small></h4>
+    <p>{{ p.explanation }}</p>
+  </section>
+
+  <section class="proposal">
+    <h4>Proposed fix: <span class="action">{{ v.action_label }}</span></h4>
+
+    {% if v.columns %}
+    <div class="scroll"><table class="compare">
+      <thead><tr><th></th>
+        {% for col in v.columns %}<th class="{{ 'keep' if col.role == 'keep' else 'away' }}">
+          {{ 'Keep' if col.role == 'keep' else 'Merge away' }}<small>{{ col.record_id[-8:] }}</small></th>{% endfor %}
+      </tr></thead>
+      <tbody>
+      {% for f in v.compare_fields %}
+        <tr><th>{{ f }}</th>
+        {% for col in v.columns %}
+          <td class="{{ 'blank' if col.values[f] == '(blank)' }}">
+            {% if f in col.updates %}<del>{{ col.values[f] }}</del> <ins>{{ col.updates[f] }}</ins>{% else %}{{ col.values[f] }}{% endif %}
+          </td>
+        {% endfor %}</tr>
+      {% endfor %}
+      </tbody>
+    </table></div>
+    {% if v.changes %}<p class="hint">Blank fields on the kept record that will be filled from the duplicate are shown as <ins>new</ins> values.</p>{% endif %}
+
+    {% elif v.changes %}
+    <table class="diff">
+      <thead><tr><th>Record</th><th>Field</th><th>Before</th><th>After</th></tr></thead>
+      <tbody>
+      {% for c in v.changes %}
+        <tr><td>{{ c.record }}</td><td><code>{{ c.field }}</code></td><td><del>{{ c.before }}</del></td><td><ins>{{ c.after }}</ins></td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    {% if p.action.value == 'flag_for_review' %}
+      <div class="task"><b>Creates a Task for the record owner:</b> &ldquo;{{ p.review_note }}&rdquo;</div>
+    {% endif %}
+  </section>
+
+  <details class="evidence">
+    <summary>Evidence &amp; records</summary>
+    {% if v.evidence %}<ul>{% for e in v.evidence %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+    <pre>{{ p.finding.details | pretty_json }}</pre>
+  </details>
+
+  <footer>
+    {% if v.can_decide %}
+      <input type="text" name="note" id="note-{{ p.id }}" placeholder="Optional note for the audit log" maxlength="500" aria-label="Optional note">
+      <button class="approve" hx-post="/proposals/{{ p.id }}/approve" hx-include="#note-{{ p.id }}" hx-target="#proposal-{{ p.id }}" hx-swap="outerHTML">Approve</button>
+      <button class="reject" hx-post="/proposals/{{ p.id }}/reject" hx-include="#note-{{ p.id }}" hx-target="#proposal-{{ p.id }}" hx-swap="outerHTML">Reject</button>
+    {% else %}
+      <span class="decided">
+        {{ p.status.value|capitalize }} by <b>{{ p.decided_by }}</b> on {{ p.decided_at|short_time }}{% if p.decision_note %} &mdash; &ldquo;{{ p.decision_note }}&rdquo;{% endif %}.
+        {% if p.applied %}Applied to Salesforce {{ p.applied_at|short_time }}.
+        {% elif p.apply_status %}<span class="warn">Last apply attempt: {{ p.apply_status.value }} &mdash; {{ p.apply_error }}</span>
+        {% elif p.status.value == 'approved' %}Waiting for <code>sfdq apply</code>.{% endif %}
+      </span>
+      {% if v.can_undo %}
+        <button class="undo" hx-post="/proposals/{{ p.id }}/reopen" hx-target="#proposal-{{ p.id }}" hx-swap="outerHTML">Undo</button>
+      {% endif %}
+    {% endif %}
+    <a class="auditlink" href="/audit?proposal={{ p.id }}">History</a>
+  </footer>
+</article>

@@ -135,6 +135,47 @@ terminal with `sfdq apply --dry-run` and `sfdq apply`. An HTTP transport is avai
 I tested the server with the official MCP Python client over both an in-process connection and a real stdio subprocess,
 but not inside the Claude Desktop app itself.
 
+## Eval harness: does the agent actually fix things correctly?
+
+`sfdq eval` runs the agent over every seeded problem in the mock org, compares each proposal with a labeled
+expected-fixes file, and reports **precision and recall per issue type** plus a markdown report
+([sample report](docs/eval-report.md)). It uses the mock LLM by default and real Claude when `ANTHROPIC_API_KEY` is set
+(`--mock` forces the mock). It runs on a freshly generated org and persists nothing.
+
+```bash
+sfdq eval                                   # writes eval-report.md
+sfdq eval --json results.json --min-auto-precision 0.95   # exit 1 if wrong auto-fixes creep in (CI gate)
+ANTHROPIC_API_KEY=... sfdq eval --limit 20  # try real Claude on a small sample first
+```
+
+**Where the labels come from.** The generator records the *correct* value of every field it corrupts, and
+[`expected_fixes.json`](src/sfdq/eval/data/expected_fixes.json) says what a careful analyst would do: restore the value when
+the data allows it, merge the right records, or *ask the owner* when it does not. So the agent is scored against reality, not
+against itself. Each fixable label has a difficulty tier (*mechanical*: follows from the bad value; *needs context*: needs
+the state, the Account's website, or a record comparison), and a test fails if the committed labels drift from the generator.
+
+**What is measured.** Auto-fix precision (of the merges and updates it proposed, how many were exactly right: the number to
+protect, since a wrong auto-fix corrupts data), auto-fix recall, *restraint* (asked the owner where it should, with a count of
+unsafe auto-fixes), and detection precision/recall for the deterministic scanners, including look-alike decoys.
+
+Baseline with the canned mock agent (232 seeded problems):
+
+| Issue type | Seeded | Detection P / R | Auto-fix precision | Auto-fix recall | Asked owner correctly |
+|---|---:|---:|---:|---:|---:|
+| Duplicates | 30 | 100% / 100% | 100% (30/30) | 100% (30/30) | n/a |
+| Missing fields | 68 | 100% / 100% | 100% (8/8) | 100% (8/8) | 100% (60/60) |
+| Stale records | 98 | 100% / 100% | n/a | n/a | 100% (98/98) |
+| Invalid formats | 36 | 100% / 100% | 100% (20/20) | 87% (20/23) | 100% (13/13) |
+| **All** | **232** | **100% / 100%** | **100% (58/58)** | **95% (58/61)** | **100% (171/171)** |
+
+Read this baseline with care: the mock agent's canned logic was written with these same problem types in mind, so its high
+score validates the *pipeline and the harness*, and gives a regression baseline, not evidence of how Claude performs. Its
+three misses are the context-dependent email repairs (a missing `.com`, a missing `@`, a space in the local part) that need
+the Account's website, which is exactly the kind of case a tool-using LLM should win. I have **not** run the eval against
+real Claude (no API key in my environment), so there are no real-model numbers here yet. The harness is tested
+to tell good from bad: a deliberately reckless agent scores under 30% precision with over 100 unsafe auto-fixes, and a timid
+agent that only flags scores 0% recall and zero unsafe fixes.
+
 ## Design decisions
 
 **Deterministic scanners + LLM reasoning.** Finding problems is a precision/recall exercise that must be

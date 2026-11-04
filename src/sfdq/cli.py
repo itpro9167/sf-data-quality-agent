@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Annotated, NoReturn
 
 import typer
+from dotenv import load_dotenv
 from rich.console import Console
 from rich.table import Table
 
@@ -20,12 +21,12 @@ from sfdq.agent import FixProposer, LLMFatalError, build_llm_client, propose_all
 from sfdq.models import Finding, FindingKind, ProposalDraft
 from sfdq.policy import WritePolicy
 from sfdq.queue import Applier, Outcome
-from sfdq.rules import RulesError
+from sfdq.rules import RulesError, load_rules
 from sfdq.runtime import Runtime, build_runtime
 from sfdq.salesforce.base import SalesforceClient, SalesforceError
 from sfdq.salesforce.mock import MockSalesforceClient
 from sfdq.scanners import run_scan
-from sfdq.settings import ConfigError
+from sfdq.settings import ConfigError, load_settings
 
 app = typer.Typer(
     name="sfdq",
@@ -282,6 +283,120 @@ def apply(
     console.print(f"{summary}. Every action was written to the audit log (`sfdq audit`).")
     if tally[Outcome.FAILED]:
         raise typer.Exit(1)
+
+
+# --------------------------------------------------------------------------------------------
+# eval
+# --------------------------------------------------------------------------------------------
+@app.command("eval")
+def eval_agent(
+    output: Annotated[Path, typer.Option("--output", "-o", help="Markdown report path.")] = Path(
+        "eval-report.md"
+    ),
+    json_out: Annotated[
+        Path | None, typer.Option("--json", help="Also write results as JSON.")
+    ] = None,
+    labels: Annotated[Path | None, typer.Option(help="Labeled expected-fixes JSON.")] = None,
+    kind: KindOption = None,
+    limit: Annotated[int | None, typer.Option("--limit", "-n", help="Evaluate N findings.")] = None,
+    mock: Annotated[
+        bool, typer.Option("--mock", help="Use the mock LLM even if ANTHROPIC_API_KEY is set.")
+    ] = False,
+    yes: Annotated[
+        bool, typer.Option("--yes", "-y", help="Skip the API-cost confirmation.")
+    ] = False,
+    min_auto_precision: Annotated[
+        float | None,
+        typer.Option(help="Exit 1 if auto-fix precision is below this (0-1), e.g. as a CI gate."),
+    ] = None,
+    rules: RulesOption = None,
+) -> None:
+    """Score the agent against labeled expected fixes (precision/recall per issue type).
+
+    Runs on a freshly generated mock org and persists nothing. Uses the mock LLM by default and
+    real Claude when ANTHROPIC_API_KEY is set (pass --mock to force the mock).
+    """
+    from rich.progress import BarColumn, MofNCompleteColumn, Progress, TextColumn
+
+    from sfdq.agent import MockLLMClient
+    from sfdq.eval import EvalError, load_labels, render_json, render_markdown, run_eval
+
+    load_dotenv()
+    try:
+        settings = load_settings()
+        rule_set = load_rules(rules or settings.rules_path)
+        label_set = load_labels(labels)
+    except (ConfigError, RulesError, OSError, ValueError) as exc:
+        _die(f"cannot start the eval: {exc}")
+    llm = MockLLMClient() if mock or settings.llm_mode == "mock" else build_llm_client(settings)
+    console.print(f"[dim]Eval agent: {llm.name} ({llm.model}); dataset: seeded mock org[/]")
+    planned = min(limit or len(label_set.fixes), len(label_set.fixes))
+    if llm.name != "mock" and planned > 25 and not yes:
+        typer.confirm(
+            f"This evaluates up to {planned} findings with Claude ({llm.model}) and incurs API "
+            "usage. Continue? (tip: --limit N to try a few first)",
+            abort=True,
+        )
+    try:
+        with Progress(
+            TextColumn("Proposing fixes"), BarColumn(), MofNCompleteColumn(), console=console
+        ) as bar:
+            task = bar.add_task("", total=planned)
+            result = run_eval(
+                rules=rule_set,
+                llm=llm,
+                labels=label_set,
+                kinds=kind,
+                limit=limit,
+                on_progress=lambda i, n, f: bar.update(task, total=n, completed=i),
+            )
+    except LLMFatalError as exc:
+        _die(f"LLM unavailable: {exc}")
+    except EvalError as exc:
+        _die(str(exc))
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(render_markdown(result), "utf-8")
+    if json_out:
+        json_out.parent.mkdir(parents=True, exist_ok=True)
+        json_out.write_text(render_json(result), "utf-8")
+
+    def pct(v: float | None) -> str:
+        return "n/a" if v is None else f"{v:.0%}"
+
+    table = Table(title="Eval results", title_justify="left")
+    for col in ("Issue type", "Seeded", "Detect P/R", "Fix P", "Fix R", "Flag", "Unsafe"):
+        table.add_column(col, justify="left" if col == "Issue type" else "right", no_wrap=True)
+    groups = {**result.metrics.by_issue_type, "all": result.metrics.overall}
+    for name, g in groups.items():
+        r = g.rates
+        table.add_row(
+            name.replace("_", " "),
+            str(g.labeled),
+            f"{pct(r['detection_precision'])}/{pct(r['detection_recall'])}",
+            pct(r["auto_precision"]),
+            pct(r["auto_recall"]),
+            pct(r["flag_accuracy"]),
+            str(g.unsafe_auto),
+        )
+    console.print(table)
+    console.print(f"Report written to [bold]{output}[/]" + (f" and {json_out}" if json_out else ""))
+    console.print(
+        "[dim]Fix P/R = precision/recall of automated fixes (merge, update). Flag = asked the "
+        "owner when it should. Unsafe = auto-fixed what needed a human.[/]"
+    )
+    precision = result.metrics.overall.rates["auto_precision"]
+    if min_auto_precision is not None:
+        if precision is None:
+            console.print(
+                "[yellow]No automated proposals in this run: precision gate not applicable.[/]"
+            )
+        elif precision < min_auto_precision:
+            err.print(
+                f"[bold red]auto-fix precision {pct(precision)} is below the required "
+                f"{min_auto_precision:.0%}[/]"
+            )
+            raise typer.Exit(1)
 
 
 # --------------------------------------------------------------------------------------------

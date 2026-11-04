@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set active = 'audit' %}
+{% block title %}Audit log &middot; sfdq{% endblock %}
+{% block content %}
+  <h2 class="pagehead">Audit log
+    {% if proposal_filter %}<small>proposal #{{ proposal_filter }} &middot; <a href="/audit">show all</a></small>{% endif %}
+  </h2>
+  <p class="chain {{ 'ok' if chain.ok else 'bad' }}">
+    {% if chain.ok %}&#10003; Hash chain verified: {{ chain.entries }} entries, no tampering detected.
+    {% else %}&#10007; Hash chain BROKEN at entry #{{ chain.first_bad_id }} &mdash; the log was modified outside sfdq.{% endif %}
+  </p>
+  <p class="hint">Append-only: every scan, proposal, decision and apply attempt (including dry runs) is recorded, newest first.</p>
+  <div class="scroll"><table class="audit">
+    <thead><tr><th>#</th><th>When</th><th>Who</th><th>Event</th><th>Proposal</th><th>Details</th></tr></thead>
+    <tbody>
+    {% for e in entries %}
+      <tr>
+        <td>{{ e.id }}</td><td>{{ e.ts|short_time }}</td><td>{{ e.actor }}</td>
+        <td><span class="badge ev-{{ e.event }}">{{ e.event }}</span></td>
+        <td>{% if e.proposal_id %}<a href="/audit?proposal={{ e.proposal_id }}">#{{ e.proposal_id }}</a>{% endif %}</td>
+        <td><code class="detail">{{ e.details | tojson }}</code></td>
+      </tr>
+    {% else %}
+      <tr><td colspan="6" class="empty">No entries yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+{% endblock %}

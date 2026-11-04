@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% set active = 'queue' %}
+{% block content %}
+  {% include "_counts.html" %}
+  <div id="queue">{% include "_queue.html" %}</div>
+{% endblock %}

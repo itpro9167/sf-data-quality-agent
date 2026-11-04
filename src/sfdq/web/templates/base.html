@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}sfdq review{% endblock %}</title>
+  <meta name="htmx-config" content='{"includeIndicatorStyles": false, "allowEval": false}'>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/htmx.min.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">sfdq <span>data-quality review</span></div>
+    <nav>
+      <a href="/" {% if active == 'queue' %}class="on"{% endif %}>Review queue</a>
+      <a href="/audit" {% if active == 'audit' %}class="on"{% endif %}>Audit log</a>
+    </nav>
+    <div class="mode" title="Which components are real vs mock">{{ mode }}</div>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer>
+    AI proposes, humans approve. Nothing on this page can write to Salesforce &mdash;
+    approved fixes are applied separately with <code>sfdq apply</code>.
+  </footer>
+</body>
+</html>

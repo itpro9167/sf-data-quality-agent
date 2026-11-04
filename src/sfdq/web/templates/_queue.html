@@ -1,0 +1,54 @@
+<nav class="tabs" aria-label="Status filter">
+  {% for key, label in tabs %}
+    {% set qs = '?status=' ~ key ~ '&kind=' ~ filters.kind ~ '&confidence=' ~ filters.confidence ~ '&object=' ~ filters.object %}
+    <a href="/{{ qs }}" hx-get="/{{ qs }}" hx-target="#queue" hx-push-url="true"
+       class="{% if filters.status == key %}on{% endif %}">{{ label }}</a>
+  {% endfor %}
+</nav>
+
+<form class="filters" hx-get="/" hx-target="#queue" hx-push-url="true" hx-trigger="change">
+  <input type="hidden" name="status" value="{{ filters.status }}">
+  <label>Type
+    <select name="kind">
+      <option value="">All</option>
+      {% for value, label in kinds %}<option value="{{ value }}" {% if filters.kind == value %}selected{% endif %}>{{ label|capitalize }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Object
+    <select name="object">
+      <option value="">All</option>
+      {% for o in ['Account', 'Contact'] %}<option {% if filters.object == o %}selected{% endif %}>{{ o }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Confidence
+    <select name="confidence">
+      <option value="">All</option>
+      {% for c in ['high', 'medium', 'low'] %}<option value="{{ c }}" {% if filters.confidence == c %}selected{% endif %}>{{ c|capitalize }}</option>{% endfor %}
+    </select>
+  </label>
+  <span class="total">{{ total }} proposal{{ '' if total == 1 else 's' }}</span>
+  <noscript><button type="submit">Apply filters</button></noscript>
+</form>
+
+{% if not cards %}
+  <div class="empty">
+    {% if counts.pending == 0 and total == 0 and filters.status == 'pending' %}
+      Nothing waiting for review. Run <code>sfdq scan</code> then <code>sfdq propose</code> to fill the queue.
+    {% else %}
+      No proposals match these filters.
+    {% endif %}
+  </div>
+{% endif %}
+
+<div class="cards">
+  {% for v in cards %}{% include "_card.html" %}{% endfor %}
+</div>
+
+{% if pages > 1 %}
+<nav class="pager">
+  {% set base = '?status=' ~ filters.status ~ '&kind=' ~ filters.kind ~ '&confidence=' ~ filters.confidence ~ '&object=' ~ filters.object %}
+  {% if page > 1 %}<a href="/{{ base }}&page={{ page - 1 }}" hx-get="/{{ base }}&page={{ page - 1 }}" hx-target="#queue" hx-push-url="true">&larr; Previous</a>{% endif %}
+  <span>Page {{ page }} of {{ pages }}</span>
+  {% if page < pages %}<a href="/{{ base }}&page={{ page + 1 }}" hx-get="/{{ base }}&page={{ page + 1 }}" hx-target="#queue" hx-push-url="true">Next &rarr;</a>{% endif %}
+</nav>
+{% endif %}

@@ -5,11 +5,11 @@ from __future__ import annotations
 from datetime import date
 
 import pytest
-from tests.conftest import AS_OF, rec
 
 from sfdq.rules import Rules
 from sfdq.scanners.missing_fields import MissingFieldsScanner
 from sfdq.scanners.stale import StaleScanner, months_before
+from tests.conftest import AS_OF, rec
 
 
 def test_missing_fields_reports_each_gap_once_per_record(rules: Rules) -> None:

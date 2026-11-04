@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-from tests.conftest import AS_OF
-
 from sfdq.models import FindingKind
 from sfdq.rules import Rules
 from sfdq.salesforce.mock import MockSalesforceClient
 from sfdq.scanners import run_scan
+from tests.conftest import AS_OF
 
 
 def test_scan_matches_every_seeded_problem_and_nothing_else(

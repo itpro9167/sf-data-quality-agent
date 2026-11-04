@@ -6,7 +6,6 @@ import json
 import sqlite3
 
 import pytest
-from tests.conftest import AS_OF, first_finding, flag_draft, format_fix_draft, merge_draft
 
 from sfdq.models import ApplyStatus, Finding, FindingKind, Status
 from sfdq.policy import WritePolicy
@@ -14,6 +13,7 @@ from sfdq.queue import Applier, NotApprovedError, Outcome, QueueStore
 from sfdq.rules import Rules
 from sfdq.salesforce.base import SalesforceError
 from sfdq.salesforce.mock import MockSalesforceClient
+from tests.conftest import AS_OF, first_finding, flag_draft, format_fix_draft, merge_draft
 
 
 @pytest.fixture

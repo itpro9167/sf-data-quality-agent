@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import pytest
-from tests.conftest import rec
 
 from sfdq.rules import Rules
 from sfdq.salesforce.mock import MockSalesforceClient
@@ -16,6 +15,7 @@ from sfdq.scanners.duplicates import (
     suggest_survivor,
     website_domain,
 )
+from tests.conftest import rec
 
 
 @pytest.mark.parametrize(

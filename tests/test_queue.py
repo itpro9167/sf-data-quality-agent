@@ -5,7 +5,6 @@ from __future__ import annotations
 import sqlite3
 
 import pytest
-from tests.conftest import AS_OF, first_finding, flag_draft, format_fix_draft
 
 from sfdq.models import Finding, FindingKind, Status
 from sfdq.queue import (
@@ -17,6 +16,7 @@ from sfdq.queue import (
 from sfdq.rules import Rules
 from sfdq.salesforce.mock import MockSalesforceClient
 from sfdq.scanners import run_scan
+from tests.conftest import AS_OF, first_finding, flag_draft, format_fix_draft
 
 
 def test_rescan_is_idempotent_and_resolves_vanished_findings(

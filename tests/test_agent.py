@@ -7,7 +7,6 @@ from dataclasses import dataclass, field
 from typing import Any
 
 import pytest
-from tests.conftest import first_finding
 
 from sfdq.agent import FixProposer, LLMError, LLMFatalError, MockLLMClient, propose_all
 from sfdq.agent.llm import LLMTurn, ToolCall
@@ -18,6 +17,7 @@ from sfdq.policy import WritePolicy
 from sfdq.queue import QueueStore
 from sfdq.rules import Rules
 from sfdq.salesforce.mock import MockSalesforceClient
+from tests.conftest import first_finding
 
 
 @dataclass

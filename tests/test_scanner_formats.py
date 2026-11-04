@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import pytest
-from tests.conftest import rec
 
 from sfdq.scanners.formats import (
     InvalidFormatScanner,
@@ -12,6 +11,7 @@ from sfdq.scanners.formats import (
     check_postal_code,
     normalize_country,
 )
+from tests.conftest import rec
 
 
 @pytest.mark.parametrize(

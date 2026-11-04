@@ -4,12 +4,12 @@ from __future__ import annotations
 
 import pytest
 from fastapi.testclient import TestClient
-from tests.conftest import first_finding, flag_draft, format_fix_draft, merge_draft
 
 from sfdq.models import Finding, FindingKind, Status
 from sfdq.queue import QueueStore
 from sfdq.settings import Settings
 from sfdq.web.app import create_app
+from tests.conftest import first_finding, flag_draft, format_fix_draft, merge_draft
 
 HX = {"HX-Request": "true"}
 

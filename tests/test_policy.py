@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import pytest
-from tests.conftest import first_finding, flag_draft, format_fix_draft, merge_draft
 
 from sfdq.models import ActionType, Confidence, FieldChange, Finding, FindingKind, ProposalDraft
 from sfdq.policy import PolicyViolation, WritePolicy
 from sfdq.rules import Rules
+from tests.conftest import first_finding, flag_draft, format_fix_draft, merge_draft
 
 
 @pytest.fixture

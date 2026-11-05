@@ -7,7 +7,6 @@ runs against the built-in fake org and canned "LLM", so the whole pipeline works
 from __future__ import annotations
 
 import sys
-from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 from typing import Annotated, NoReturn
@@ -21,13 +20,13 @@ from sfdq import __version__
 from sfdq.agent import FixProposer, LLMFatalError, build_llm_client, propose_all
 from sfdq.models import Finding, FindingKind, ProposalDraft
 from sfdq.policy import WritePolicy
-from sfdq.queue import Applier, Outcome, QueueStore
-from sfdq.rules import Rules, RulesError, load_rules
+from sfdq.queue import Applier, Outcome
+from sfdq.rules import RulesError, load_rules
+from sfdq.runtime import Runtime, build_runtime
 from sfdq.salesforce.base import SalesforceClient, SalesforceError
-from sfdq.salesforce.factory import build_salesforce_client
 from sfdq.salesforce.mock import MockSalesforceClient
 from sfdq.scanners import run_scan
-from sfdq.settings import ConfigError, Settings, load_settings
+from sfdq.settings import ConfigError, load_settings
 
 app = typer.Typer(
     name="sfdq",
@@ -49,36 +48,26 @@ RulesOption = Annotated[
 ]
 
 
-@dataclass
-class Runtime:
-    """Wired-up dependencies for one CLI invocation."""
-
-    settings: Settings
-    rules: Rules
-    store: QueueStore
-
-    def salesforce(self) -> SalesforceClient:
-        """Connect to Salesforce (or load the mock org)."""
-        try:
-            return build_salesforce_client(self.settings)
-        except SalesforceError as exc:
-            _die(str(exc))
-
-
 def _die(message: str, code: int = 1) -> NoReturn:
     err.print(f"[bold red]error:[/] {message}")
     raise typer.Exit(code)
 
 
-def _runtime(rules_path: Path | None = None) -> Runtime:
-    load_dotenv()  # optional .env for real-mode credentials; never required
+def _runtime(rules_path: Path | None = None, *, banner: bool = True) -> Runtime:
     try:
-        settings = load_settings()
-        rules = load_rules(rules_path or settings.rules_path)
+        rt = build_runtime(rules_path)
     except (ConfigError, RulesError) as exc:
         _die(str(exc))
-    console.print(f"[dim]{settings.describe()}[/]")
-    return Runtime(settings, rules, QueueStore(settings.db_path))
+    if banner:
+        console.print(f"[dim]{rt.settings.describe()}[/]")
+    return rt
+
+
+def _salesforce(rt: Runtime) -> SalesforceClient:
+    try:
+        return rt.salesforce()
+    except SalesforceError as exc:
+        _die(str(exc))
 
 
 def _actor(rt: Runtime) -> str:
@@ -106,7 +95,7 @@ def scan(
 ) -> None:
     """Run the deterministic scanners (no LLM) and save findings to the queue database."""
     rt = _runtime(rules)
-    sf = rt.salesforce()
+    sf = _salesforce(rt)
     report = run_scan(sf, rt.rules, as_of=date.today(), kinds=kind)
     diff = rt.store.record_scan(report.findings, _actor(rt), kinds=kind)
 
@@ -159,7 +148,7 @@ def propose(
             "Continue? (tip: --limit N to try a few first)",
             abort=True,
         )
-    proposer = FixProposer(llm, rt.salesforce(), rt.rules, WritePolicy(rt.rules))
+    proposer = FixProposer(llm, _salesforce(rt), rt.rules, WritePolicy(rt.rules))
 
     def show_progress(f: Finding, d: ProposalDraft) -> None:
         marker = "[yellow]fallback[/]" if d.source == "fallback" else d.action.value
@@ -200,13 +189,37 @@ def review(
     from sfdq.web.app import create_app
 
     rt = _runtime()
-    if host not in ("127.0.0.1", "localhost", "::1"):
+    if rt.settings.public_demo:
+        console.print("[dim]Public demo mode: mock data only, shared by every visitor.[/]")
+    elif host not in ("127.0.0.1", "localhost", "::1"):
         err.print(
             "[yellow]warning:[/] the dashboard has no authentication; "
             f"binding to {host} exposes the review queue to your network."
         )
     console.print(f"Review dashboard: [bold link]http://{host}:{port}[/]  (Ctrl+C to stop)")
     uvicorn.run(create_app(rt.settings, rt.store), host=host, port=port, log_level="warning")
+
+
+# --------------------------------------------------------------------------------------------
+# mcp
+# --------------------------------------------------------------------------------------------
+@app.command("mcp")
+def mcp_server(
+    transport: Annotated[
+        str, typer.Option(help="'stdio' (Claude Desktop, IDEs) or 'streamable-http'.")
+    ] = "stdio",
+    host: Annotated[
+        str, typer.Option(help="HTTP transport only. No auth: keep localhost.")
+    ] = "127.0.0.1",
+    port: Annotated[int, typer.Option(help="HTTP transport only.")] = 8765,
+) -> None:
+    """Run the MCP server so an AI client can scan, propose and review. It can never apply."""
+    if transport not in ("stdio", "streamable-http"):
+        _die("--transport must be 'stdio' or 'streamable-http'")
+    from sfdq.mcp_server import main as run_mcp
+
+    # stdout is the MCP protocol channel on stdio: the server logs to stderr only.
+    run_mcp(transport, host, port)
 
 
 # --------------------------------------------------------------------------------------------
@@ -233,7 +246,7 @@ def apply(
     if not ready:
         console.print("Nothing to apply: no approved proposals are waiting.")
         return
-    sf = rt.salesforce()
+    sf = _salesforce(rt)
     if not dry_run and not yes:
         target = "LIVE Salesforce org" if rt.settings.salesforce_mode == "real" else "mock org"
         typer.confirm(f"Apply {len(ready)} approved proposal(s) to the {target}?", abort=True)
@@ -272,6 +285,120 @@ def apply(
     console.print(f"{summary}. Every action was written to the audit log (`sfdq audit`).")
     if tally[Outcome.FAILED]:
         raise typer.Exit(1)
+
+
+# --------------------------------------------------------------------------------------------
+# eval
+# --------------------------------------------------------------------------------------------
+@app.command("eval")
+def eval_agent(
+    output: Annotated[Path, typer.Option("--output", "-o", help="Markdown report path.")] = Path(
+        "eval-report.md"
+    ),
+    json_out: Annotated[
+        Path | None, typer.Option("--json", help="Also write results as JSON.")
+    ] = None,
+    labels: Annotated[Path | None, typer.Option(help="Labeled expected-fixes JSON.")] = None,
+    kind: KindOption = None,
+    limit: Annotated[int | None, typer.Option("--limit", "-n", help="Evaluate N findings.")] = None,
+    mock: Annotated[
+        bool, typer.Option("--mock", help="Use the mock LLM even if ANTHROPIC_API_KEY is set.")
+    ] = False,
+    yes: Annotated[
+        bool, typer.Option("--yes", "-y", help="Skip the API-cost confirmation.")
+    ] = False,
+    min_auto_precision: Annotated[
+        float | None,
+        typer.Option(help="Exit 1 if auto-fix precision is below this (0-1), e.g. as a CI gate."),
+    ] = None,
+    rules: RulesOption = None,
+) -> None:
+    """Score the agent against labeled expected fixes (precision/recall per issue type).
+
+    Runs on a freshly generated mock org and persists nothing. Uses the mock LLM by default and
+    real Claude when ANTHROPIC_API_KEY is set (pass --mock to force the mock).
+    """
+    from rich.progress import BarColumn, MofNCompleteColumn, Progress, TextColumn
+
+    from sfdq.agent import MockLLMClient
+    from sfdq.eval import EvalError, load_labels, render_json, render_markdown, run_eval
+
+    load_dotenv()
+    try:
+        settings = load_settings()
+        rule_set = load_rules(rules or settings.rules_path)
+        label_set = load_labels(labels)
+    except (ConfigError, RulesError, OSError, ValueError) as exc:
+        _die(f"cannot start the eval: {exc}")
+    llm = MockLLMClient() if mock or settings.llm_mode == "mock" else build_llm_client(settings)
+    console.print(f"[dim]Eval agent: {llm.name} ({llm.model}); dataset: seeded mock org[/]")
+    planned = min(limit or len(label_set.fixes), len(label_set.fixes))
+    if llm.name != "mock" and planned > 25 and not yes:
+        typer.confirm(
+            f"This evaluates up to {planned} findings with Claude ({llm.model}) and incurs API "
+            "usage. Continue? (tip: --limit N to try a few first)",
+            abort=True,
+        )
+    try:
+        with Progress(
+            TextColumn("Proposing fixes"), BarColumn(), MofNCompleteColumn(), console=console
+        ) as bar:
+            task = bar.add_task("", total=planned)
+            result = run_eval(
+                rules=rule_set,
+                llm=llm,
+                labels=label_set,
+                kinds=kind,
+                limit=limit,
+                on_progress=lambda i, n, f: bar.update(task, total=n, completed=i),
+            )
+    except LLMFatalError as exc:
+        _die(f"LLM unavailable: {exc}")
+    except EvalError as exc:
+        _die(str(exc))
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(render_markdown(result), "utf-8")
+    if json_out:
+        json_out.parent.mkdir(parents=True, exist_ok=True)
+        json_out.write_text(render_json(result), "utf-8")
+
+    def pct(v: float | None) -> str:
+        return "n/a" if v is None else f"{v:.0%}"
+
+    table = Table(title="Eval results", title_justify="left")
+    for col in ("Issue type", "Seeded", "Detect P/R", "Fix P", "Fix R", "Flag", "Unsafe"):
+        table.add_column(col, justify="left" if col == "Issue type" else "right", no_wrap=True)
+    groups = {**result.metrics.by_issue_type, "all": result.metrics.overall}
+    for name, g in groups.items():
+        r = g.rates
+        table.add_row(
+            name.replace("_", " "),
+            str(g.labeled),
+            f"{pct(r['detection_precision'])}/{pct(r['detection_recall'])}",
+            pct(r["auto_precision"]),
+            pct(r["auto_recall"]),
+            pct(r["flag_accuracy"]),
+            str(g.unsafe_auto),
+        )
+    console.print(table)
+    console.print(f"Report written to [bold]{output}[/]" + (f" and {json_out}" if json_out else ""))
+    console.print(
+        "[dim]Fix P/R = precision/recall of automated fixes (merge, update). Flag = asked the "
+        "owner when it should. Unsafe = auto-fixed what needed a human.[/]"
+    )
+    precision = result.metrics.overall.rates["auto_precision"]
+    if min_auto_precision is not None:
+        if precision is None:
+            console.print(
+                "[yellow]No automated proposals in this run: precision gate not applicable.[/]"
+            )
+        elif precision < min_auto_precision:
+            err.print(
+                f"[bold red]auto-fix precision {pct(precision)} is below the required "
+                f"{min_auto_precision:.0%}[/]"
+            )
+            raise typer.Exit(1)
 
 
 # --------------------------------------------------------------------------------------------
@@ -329,6 +456,31 @@ def audit(
             f"[bold red]Hash chain BROKEN at entry #{chain.first_bad_id}: the log was altered.[/]"
         )
         raise typer.Exit(1)
+
+
+@app.command("seed-demo")
+def seed_demo_cmd(
+    force: Annotated[
+        bool, typer.Option("--force", help="Wipe existing demo state and start over.")
+    ] = False,
+) -> None:
+    """Prepare sample data for the dashboard: scan the mock org and queue proposals (idempotent)."""
+    from sfdq.demo import seed_demo
+
+    rt = _runtime()
+    try:
+        summary = seed_demo(rt.settings, rt.rules, force=force)
+    except ConfigError as exc:
+        _die(str(exc))
+    if summary.seeded:
+        console.print(
+            f"Demo seeded: {summary.findings} findings, {summary.pending} pending proposals."
+        )
+    else:
+        console.print(
+            f"Demo data already present ({summary.findings} findings, {summary.pending} pending). "
+            "Use --force to start over."
+        )
 
 
 @app.command("reset-demo")

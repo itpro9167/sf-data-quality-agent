@@ -98,6 +98,15 @@ class ScanDiff:
     reopened: int = 0
 
 
+@dataclass(frozen=True)
+class FindingRow:
+    """A finding plus the state of its proposal, if it has one."""
+
+    finding: Finding
+    proposal_id: int | None
+    proposal_status: Status | None
+
+
 class QueueStore:
     """Findings, proposals and the audit log, in one SQLite file."""
 
@@ -232,6 +241,57 @@ class QueueStore:
             params.append(limit)
         with self._connect() as conn:
             return [_finding_from_row(r) for r in conn.execute(sql, params)]
+
+    def list_findings(
+        self,
+        kind: FindingKind | None = None,
+        object_type: str | None = None,
+        proposal: str = "any",
+        limit: int = 20,
+        offset: int = 0,
+    ) -> tuple[list[FindingRow], int]:
+        """Open findings with their proposal state, plus the total matching count.
+
+        Args:
+            kind: Only this finding kind.
+            object_type: Only ``Account`` or ``Contact``.
+            proposal: ``"any"``, ``"none"`` (no proposal yet) or ``"exists"``.
+            limit: Page size.
+            offset: Rows to skip.
+        """
+        if proposal not in ("any", "none", "exists"):
+            raise ValueError("proposal must be 'any', 'none' or 'exists'")
+        where = "f.resolved_at IS NULL"
+        params: list[Any] = []
+        if kind is not None:
+            where += " AND f.kind = ?"
+            params.append(kind.value)
+        if object_type is not None:
+            where += " AND f.object_type = ?"
+            params.append(object_type)
+        if proposal == "none":
+            where += " AND p.id IS NULL"
+        elif proposal == "exists":
+            where += " AND p.id IS NOT NULL"
+        base = f"FROM findings f LEFT JOIN proposals p ON p.finding_id = f.id WHERE {where}"
+        with self._connect() as conn:
+            total = conn.execute(f"SELECT COUNT(*) AS n {base}", params).fetchone()["n"]
+            rows = conn.execute(
+                f"SELECT f.*, p.id AS p_id, p.status AS p_status {base} "
+                "ORDER BY f.kind, COALESCE(f.score, 0) DESC, f.id LIMIT ? OFFSET ?",
+                [*params, limit, offset],
+            ).fetchall()
+        return (
+            [
+                FindingRow(
+                    _finding_from_row(r),
+                    r["p_id"],
+                    Status(r["p_status"]) if r["p_status"] else None,
+                )
+                for r in rows
+            ],
+            int(total),
+        )
 
     def count_findings(self, *, open_only: bool = True) -> dict[str, int]:
         """Findings per kind."""

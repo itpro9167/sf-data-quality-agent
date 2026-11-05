@@ -17,6 +17,13 @@
     </nav>
     <div class="mode" title="Which components are real vs mock">{{ mode }}</div>
   </header>
+  {% if demo %}
+  <div class="demo-banner" role="note">
+    <span><b>Public demo.</b> Fake data only, shared by every visitor, and approving a fix here changes
+      nothing outside this page. Data resets when the server restarts.</span>
+    <button hx-post="/demo/reset" hx-confirm="Reset the demo to its original 232 pending proposals?">Reset demo data</button>
+  </div>
+  {% endif %}
   <main>{% block content %}{% endblock %}</main>
   <footer>
     AI proposes, humans approve. Nothing on this page can write to Salesforce &mdash;

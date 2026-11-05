@@ -3,6 +3,7 @@
 from sfdq.queue.applier import Applier, ApplyResult, NotApprovedError, Outcome
 from sfdq.queue.store import (
     DuplicateProposal,
+    FindingRow,
     InvalidTransition,
     NotFoundError,
     QueueError,
@@ -14,6 +15,7 @@ __all__ = [
     "Applier",
     "ApplyResult",
     "DuplicateProposal",
+    "FindingRow",
     "InvalidTransition",
     "NotApprovedError",
     "NotFoundError",

@@ -1,0 +1,17 @@
+# Keep the build context small and never ship secrets or local state.
+.git
+.github
+.venv
+venv
+.env
+.env.*
+!.env.example
+.sfdq
+*.db
+__pycache__
+*.py[cod]
+.pytest_cache
+.mypy_cache
+.ruff_cache
+tests
+docs

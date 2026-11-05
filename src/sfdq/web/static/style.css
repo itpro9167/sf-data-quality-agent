@@ -177,3 +177,11 @@ footer:not(.card footer) { max-width: 1040px; margin: 0 auto; padding: 0 16px 32
   main { padding: 14px 12px 40px; }
   .card { padding: 12px 12px 10px; }
 }
+
+/* public demo banner */
+.demo-banner {
+  display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+  padding: 8px 16px; background: var(--warn-bg); color: var(--warn); font-size: 13.5px;
+  border-bottom: 1px solid var(--border);
+}
+.demo-banner button { padding: 4px 12px; font-size: 13px; }

@@ -110,6 +110,8 @@ DESCRIPTIONS = [
 OWNER_NAMES = ["Dana Whitfield", "Marcus Lee", "Priya Raman", "Tom Becker", "Sofia Alvarez"]
 
 LEADING_ZERO_STATES = ("MA", "NJ", "CT")
+_FORMAT_FIELDS = ("Phone", "MobilePhone", "Email", "BillingPostalCode", "MailingPostalCode")
+_MISSING_FIELDS = ("Industry", "Phone", "Website", "BillingCountry", "Email", "AccountId", "Title")
 
 
 # --------------------------------------------------------------------------------------------
@@ -124,6 +126,9 @@ class SeededProblems:
     missing_fields: dict[str, dict[str, list[str]]] = field(default_factory=dict)
     stale: dict[str, list[str]] = field(default_factory=dict)
     invalid_formats: dict[str, list[list[str]]] = field(default_factory=dict)  # [id, field]
+    # "<record id>:<field>" -> the CORRECT value before it was corrupted/blanked. Ground truth for
+    # the eval harness (what a careful analyst would restore), independent of any scanner/agent.
+    truth: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -177,6 +182,7 @@ class _Builder:
         self.dup_account_ids: set[str] = set()  # every member of a duplicate cluster
         self.dup_extra_account_ids: set[str] = set()  # members other than the original
         self.dup_contact_ids: set[str] = set()
+        self._snap: dict[tuple[str, str], Any] = {}  # pristine values, taken before corruption
 
     # -- primitives ------------------------------------------------------------------------
     def _new_id(self, prefix: str) -> str:
@@ -332,6 +338,7 @@ class _Builder:
         # Three clusters have *complementary* gaps so a merge has something to fill in:
         # the original lacks Industry while the duplicate lacks Phone.
         for members in self.dup_clusters_accounts[:3]:
+            self._snap.update(self._snapshot(members[:2], _MISSING_FIELDS))
             members[0]["Industry"] = None
             members[1]["Phone"] = None
             self._mark_missing("Account", members[0], ["Industry"])
@@ -493,7 +500,13 @@ class _Builder:
         self.seeded.decoys["Contact"] = decoys
 
     # -- seeded problems -------------------------------------------------------------------
+    @staticmethod
+    def _snapshot(records: list[Record], fields: tuple[str, ...]) -> dict[tuple[str, str], Any]:
+        return {(r["Id"], f): r.get(f) for r in records for f in fields if f in r}
+
     def _mark_missing(self, obj: str, record: Record, fields: list[str]) -> None:
+        for f in fields:
+            self.seeded.truth[f"{record['Id']}:{f}"] = self._snap[(record["Id"], f)]
         bucket = self.seeded.missing_fields.setdefault(obj, {})
         bucket.setdefault(record["Id"], [])
         for f in fields:
@@ -501,6 +514,7 @@ class _Builder:
                 bucket[record["Id"]].append(f)
 
     def _mark_format(self, obj: str, record: Record, field_name: str) -> None:
+        self.seeded.truth[f"{record['Id']}:{field_name}"] = self._snap[(record["Id"], field_name)]
         self.seeded.invalid_formats.setdefault(obj, []).append([record["Id"], field_name])
 
     def inject_formats(self) -> None:
@@ -510,6 +524,7 @@ class _Builder:
         decoy_ids = {i for pair in self.seeded.decoys.get("Account", []) for i in pair}
         acc_pool = [a for a in acc_pool if a["Id"] not in decoy_ids]
         self.format_touched: set[str] = set()
+        self._snap.update(self._snapshot([*self.accounts, *self.contacts], _FORMAT_FIELDS))
 
         def take(pool: list[Record], n: int, predicate: Any = None) -> list[Record]:
             eligible = [r for r in pool if r["Id"] not in self.format_touched and
@@ -552,6 +567,10 @@ class _Builder:
                 [f"{local}@gmial.com", f"{local}@hotmial.com", f"{local}@{domain.split('.')[0]}"]
             )
             self._mark_format("Contact", con, "Email")
+            # A typo'd personal domain was meant to be that personal address (not the work one).
+            for typo, fixed in (("@gmial.com", "@gmail.com"), ("@hotmial.com", "@hotmail.com")):
+                if con["Email"].endswith(typo):
+                    self.seeded.truth[f"{con['Id']}:Email"] = f"{local}{fixed}"
         for con in take(con_pool, 4):
             con["Email"] = rng.choice(
                 [
@@ -577,6 +596,7 @@ class _Builder:
 
     def inject_missing(self) -> None:
         rng = self.rng
+        self._snap.update(self._snapshot([*self.accounts, *self.contacts], _MISSING_FIELDS))
         acc_pool = [
             a for a in self.accounts
             if a["Id"] not in self.dup_account_ids and a["Id"] not in self.format_touched

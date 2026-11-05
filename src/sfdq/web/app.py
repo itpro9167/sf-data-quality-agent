@@ -7,6 +7,7 @@ no Salesforce credentials and cannot write to Salesforce. That only happens via 
 
 from __future__ import annotations
 
+import threading
 from collections.abc import Awaitable, Callable
 from pathlib import Path
 from typing import Annotated
@@ -16,8 +17,10 @@ from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from sfdq.demo import seed_demo
 from sfdq.models import Confidence, FindingKind, QueuedProposal, Status
 from sfdq.queue import InvalidTransition, NotFoundError, QueueStore
+from sfdq.rules import load_rules
 from sfdq.settings import Settings
 from sfdq.web.views import card_view, pretty_json, short_time
 
@@ -72,6 +75,7 @@ def create_app(settings: Settings, store: QueueStore | None = None) -> FastAPI:
             "mode": settings.describe(),
             "counts": store.counts(),
             "reviewer": settings.reviewer,
+            "demo": settings.public_demo,
         }
 
     def render_card(
@@ -169,5 +173,17 @@ def create_app(settings: Settings, store: QueueStore | None = None) -> FastAPI:
         except InvalidTransition as exc:
             return render_card(request, store.get_proposal(proposal_id), str(exc), 409)
         return render_card(request, p)
+
+    # ---- public demo only ------------------------------------------------------------------
+    reset_lock = threading.Lock()
+
+    @app.post("/demo/reset", dependencies=[Depends(require_htmx)])
+    def demo_reset() -> Response:
+        """Rebuild the sample data (public-demo mode only; every visitor shares one queue)."""
+        if not settings.public_demo:
+            raise HTTPException(status_code=404, detail="not found")
+        with reset_lock:
+            seed_demo(settings, load_rules(settings.rules_path), force=True)
+        return Response(status_code=204, headers={"HX-Redirect": "/"})
 
     return app

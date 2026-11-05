@@ -1,0 +1,3534 @@
+{
+ "version": 1,
+ "seed": 42,
+ "org_fingerprint": "b2e71c080b44a4da",
+ "description": "Expected fixes for the seeded mock org (sfdq.salesforce.mock_data, seed 42), derived from the generator's ground truth.",
+ "fixes": [
+  {
+   "id": "duplicate:Account:001Dq0000000031AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000031AAA",
+    "001Dq0000000199AAA",
+    "001Dq0000000200AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000031AAA",
+    "001Dq0000000199AAA",
+    "001Dq0000000200AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Account:001Dq0000000032AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000032AAA",
+    "001Dq0000000191AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000032AAA",
+    "001Dq0000000191AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Account:001Dq0000000050AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000050AAA",
+    "001Dq0000000195AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000050AAA",
+    "001Dq0000000195AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Account:001Dq0000000082AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000082AAA",
+    "001Dq0000000196AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000082AAA",
+    "001Dq0000000196AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Account:001Dq0000000090AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000090AAA",
+    "001Dq0000000197AAA",
+    "001Dq0000000198AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000090AAA",
+    "001Dq0000000197AAA",
+    "001Dq0000000198AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Account:001Dq0000000113AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000113AAA",
+    "001Dq0000000190AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000113AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Account:001Dq0000000117AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000117AAA",
+    "001Dq0000000188AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000117AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Account:001Dq0000000119AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000119AAA",
+    "001Dq0000000189AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000119AAA",
+    "001Dq0000000189AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Account:001Dq0000000139AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000139AAA",
+    "001Dq0000000187AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000139AAA",
+    "001Dq0000000187AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Account:001Dq0000000148AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000148AAA",
+    "001Dq0000000193AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000148AAA",
+    "001Dq0000000193AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Account:001Dq0000000168AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000168AAA",
+    "001Dq0000000194AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000168AAA",
+    "001Dq0000000194AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Account:001Dq0000000174AAA",
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000174AAA",
+    "001Dq0000000192AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "001Dq0000000174AAA",
+    "001Dq0000000192AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000023AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000023AAA",
+    "003Dq0000000485AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000023AAA",
+    "003Dq0000000485AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000059AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000059AAA",
+    "003Dq0000000491AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000059AAA",
+    "003Dq0000000491AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000075AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000075AAA",
+    "003Dq0000000484AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000075AAA",
+    "003Dq0000000484AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000082AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000082AAA",
+    "003Dq0000000492AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000082AAA",
+    "003Dq0000000492AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000099AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000099AAA",
+    "003Dq0000000496AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000099AAA",
+    "003Dq0000000496AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000114AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000114AAA",
+    "003Dq0000000482AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000114AAA",
+    "003Dq0000000482AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000119AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000119AAA",
+    "003Dq0000000498AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000119AAA",
+    "003Dq0000000498AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000136AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000136AAA",
+    "003Dq0000000489AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000136AAA",
+    "003Dq0000000489AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000210AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000210AAA",
+    "003Dq0000000493AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000210AAA",
+    "003Dq0000000493AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000221AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000221AAA",
+    "003Dq0000000499AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000221AAA",
+    "003Dq0000000499AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000224AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000224AAA",
+    "003Dq0000000486AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000224AAA",
+    "003Dq0000000486AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000226AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000226AAA",
+    "003Dq0000000500AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000226AAA",
+    "003Dq0000000500AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000269AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000269AAA",
+    "003Dq0000000495AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000269AAA",
+    "003Dq0000000495AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000287AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000287AAA",
+    "003Dq0000000483AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000287AAA",
+    "003Dq0000000483AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000357AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000357AAA",
+    "003Dq0000000494AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000357AAA",
+    "003Dq0000000494AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000394AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000394AAA",
+    "003Dq0000000497AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000394AAA",
+    "003Dq0000000497AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000415AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000415AAA",
+    "003Dq0000000490AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000415AAA",
+    "003Dq0000000490AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "duplicate:Contact:003Dq0000000468AAA",
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000468AAA",
+    "003Dq0000000487AAA",
+    "003Dq0000000488AAA"
+   ],
+   "expected_action": "merge",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [
+    "003Dq0000000468AAA",
+    "003Dq0000000487AAA",
+    "003Dq0000000488AAA"
+   ],
+   "rationale": "Seeded duplicate: keep the most complete record, merge the rest."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000003AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000003AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing BillingCountry, Phone cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000004AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000004AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {
+    "Website": "birchdental.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "Website is inferable from the contacts' shared corporate email domain."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000006AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000006AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Phone cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000016AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000016AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing BillingCountry cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000033AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000033AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Phone cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000034AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000034AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing BillingCountry cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000038AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000038AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing BillingCountry, Industry cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000039AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000039AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing BillingCountry cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000046AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000046AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing BillingCountry cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000070AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000070AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Industry cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000085AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000085AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {
+    "Website": "longvieweducation.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "Website is inferable from the contacts' shared corporate email domain."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000095AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000095AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {
+    "Website": "sterlingmaterials.io"
+   },
+   "acceptable_survivors": [],
+   "rationale": "Website is inferable from the contacts' shared corporate email domain."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000101AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000101AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {
+    "Website": "redfernpayments.net"
+   },
+   "acceptable_survivors": [],
+   "rationale": "Website is inferable from the contacts' shared corporate email domain."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000102AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000102AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {
+    "Website": "riverbendmaterials.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "Website is inferable from the contacts' shared corporate email domain."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000114AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000114AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {
+    "Website": "deltahealth.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "Website is inferable from the contacts' shared corporate email domain."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000117AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000117AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Industry cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000119AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000119AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Industry cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000120AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000120AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Phone cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000128AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000128AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Phone cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000130AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000130AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing BillingCountry cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000139AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000139AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Industry cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000143AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000143AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {
+    "Website": "meridianenergy.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "Website is inferable from the contacts' shared corporate email domain."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000150AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000150AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": null,
+   "expected_changes": {
+    "Website": "tidewaterlogistics.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "Website is inferable from the contacts' shared corporate email domain."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000183AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000183AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Phone cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000186AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000186AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Industry cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000187AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000187AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Phone cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000188AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000188AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Phone cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Account:001Dq0000000189AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000189AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Phone cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000001AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000001AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000007AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000007AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000022AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000022AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000027AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000027AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing AccountId cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000029AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000029AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000052AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000052AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000054AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000054AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000062AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000062AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000071AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000071AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title, Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000103AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000103AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000104AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000104AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000123AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000123AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000142AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000142AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing AccountId cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000145AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000145AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000159AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000159AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing AccountId cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000163AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000163AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000173AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000173AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000181AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000181AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing AccountId cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000182AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000182AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000187AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000187AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title, Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000189AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000189AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000198AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000198AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing AccountId cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000204AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000204AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title, Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000205AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000205AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title, Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000206AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000206AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing AccountId cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000240AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000240AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing AccountId cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000247AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000247AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000270AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000270AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000281AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000281AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000314AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000314AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000342AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000342AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000373AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000373AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000377AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000377AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000384AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000384AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000400AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000400AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing AccountId cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000417AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000417AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title, Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000418AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000418AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title, Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000419AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000419AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000432AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000432AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title, Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "missing_fields:Contact:003Dq0000000455AAA",
+   "issue_type": "missing_fields",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000455AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Missing Title, Email cannot be derived; ask the owner."
+  },
+  {
+   "id": "stale:Account:001Dq0000000011AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000011AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000020AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000020AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000023AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000023AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000026AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000026AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000028AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000028AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000033AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000033AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000036AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000036AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000052AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000052AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000053AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000053AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000055AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000055AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000057AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000057AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000064AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000064AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000074AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000074AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000081AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000081AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000093AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000093AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000101AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000101AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000104AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000104AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000123AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000123AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000130AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000130AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000145AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000145AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000146AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000146AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000150AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000150AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000160AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000160AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000161AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000161AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000165AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000165AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000179AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000179AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000184AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000184AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Account:001Dq0000000186AAA",
+   "issue_type": "stale",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000186AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000002AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000002AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000005AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000005AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000012AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000012AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000024AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000024AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000025AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000025AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000033AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000033AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000036AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000036AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000040AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000040AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000063AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000063AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000068AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000068AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000069AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000069AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000083AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000083AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000086AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000086AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000089AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000089AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000090AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000090AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000100AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000100AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000103AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000103AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000104AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000104AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000111AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000111AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000118AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000118AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000138AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000138AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000148AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000148AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000149AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000149AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000157AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000157AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000186AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000186AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000196AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000196AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000205AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000205AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000208AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000208AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000213AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000213AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000215AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000215AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000227AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000227AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000236AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000236AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000237AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000237AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000242AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000242AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000260AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000260AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000266AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000266AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000271AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000271AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000274AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000274AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000276AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000276AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000282AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000282AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000286AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000286AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000296AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000296AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000301AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000301AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000302AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000302AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000304AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000304AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000307AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000307AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000318AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000318AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000321AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000321AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000325AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000325AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000337AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000337AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000366AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000366AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000371AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000371AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000372AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000372AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000380AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000380AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000383AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000383AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000385AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000385AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000396AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000396AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000401AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000401AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000405AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000405AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000417AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000417AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000422AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000422AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000424AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000424AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000435AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000435AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000451AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000451AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000454AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000454AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000463AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000463AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000467AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000467AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000469AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000469AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000475AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000475AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "stale:Contact:003Dq0000000477AAA",
+   "issue_type": "stale",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000477AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": null,
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "Only the record owner knows whether it is still active."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000011AAA:BillingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000011AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "BillingPostalCode",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000013AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000013AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "Phone",
+   "expected_changes": {
+    "Phone": "801.555.7062"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('801.555.7062') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000029AAA:BillingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000029AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": "BillingPostalCode",
+   "expected_changes": {
+    "BillingPostalCode": "02139"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('02139') can be restored (needs_context)."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000043AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000043AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "Phone",
+   "expected_changes": {
+    "Phone": "(602) 555-0282"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('(602) 555-0282') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000063AAA:BillingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000063AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "BillingPostalCode",
+   "expected_changes": {
+    "BillingPostalCode": "33131"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('33131') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000069AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000069AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000099AAA:BillingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000099AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "BillingPostalCode",
+   "expected_changes": {
+    "BillingPostalCode": "98101"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('98101') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000100AAA:BillingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000100AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": "BillingPostalCode",
+   "expected_changes": {
+    "BillingPostalCode": "02108"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('02108') can be restored (needs_context)."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000116AAA:BillingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000116AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": "BillingPostalCode",
+   "expected_changes": {
+    "BillingPostalCode": "07102"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('07102') can be restored (needs_context)."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000126AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000126AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000142AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000142AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Account:001Dq0000000151AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000151AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000021AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000021AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000060AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000060AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000073AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000073AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000087AAA:Email",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000087AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "Email",
+   "expected_changes": {
+    "Email": "daniel.brown@novaeducation.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('daniel.brown@novaeducation.com') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000109AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000109AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000113AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000113AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000121AAA:MailingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000121AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": "MailingPostalCode",
+   "expected_changes": {
+    "MailingPostalCode": "07102"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('07102') can be restored (needs_context)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000162AAA:Email",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000162AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": "Email",
+   "expected_changes": {
+    "Email": "james.roberts@silverlinebrewing.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('james.roberts@silverlinebrewing.com') can be restored (needs_context)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000165AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000165AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000195AAA:Email",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000195AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "Email",
+   "expected_changes": {
+    "Email": "rachel.lee@hotmail.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('rachel.lee@hotmail.com') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000200AAA:Email",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000200AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "Email",
+   "expected_changes": {
+    "Email": "grace.lopez@gmail.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('grace.lopez@gmail.com') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000209AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000209AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000232AAA:Email",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000232AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "Email",
+   "expected_changes": {
+    "Email": "steven.taylor@gmail.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('steven.taylor@gmail.com') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000241AAA:Email",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000241AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": "Email",
+   "expected_changes": {
+    "Email": "nicholas.martin@cascadesoftware.io"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('nicholas.martin@cascadesoftware.io') can be restored (needs_context)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000253AAA:MailingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000253AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "MailingPostalCode",
+   "expected_changes": {
+    "MailingPostalCode": "K1A 0B1"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('K1A 0B1') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000279AAA:MailingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000279AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "MailingPostalCode",
+   "expected_changes": {
+    "MailingPostalCode": "M5V 2T6"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('M5V 2T6') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000309AAA:MailingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000309AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": "MailingPostalCode",
+   "expected_changes": {
+    "MailingPostalCode": "02139"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('02139') can be restored (needs_context)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000346AAA:MailingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000346AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": "MailingPostalCode",
+   "expected_changes": {
+    "MailingPostalCode": "02139"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('02139') can be restored (needs_context)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000355AAA:Email",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000355AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "Email",
+   "expected_changes": {
+    "Email": "laura.harris@orchardconstruction.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('laura.harris@orchardconstruction.com') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000413AAA:Phone",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000413AAA"
+   ],
+   "expected_action": "flag_for_review",
+   "difficulty": "judgment",
+   "field": "Phone",
+   "expected_changes": {},
+   "acceptable_survivors": [],
+   "rationale": "The correct value cannot be recovered from the data; ask the owner."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000436AAA:MailingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000436AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "MailingPostalCode",
+   "expected_changes": {
+    "MailingPostalCode": "20001"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('20001') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000451AAA:Email",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000451AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "needs_context",
+   "field": "Email",
+   "expected_changes": {
+    "Email": "ethan.larsen@northwindlogistics.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('ethan.larsen@northwindlogistics.com') can be restored (needs_context)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000453AAA:MailingPostalCode",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000453AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "MailingPostalCode",
+   "expected_changes": {
+    "MailingPostalCode": "02108"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('02108') can be restored (mechanical)."
+  },
+  {
+   "id": "invalid_format:Contact:003Dq0000000475AAA:Email",
+   "issue_type": "invalid_format",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000475AAA"
+   ],
+   "expected_action": "update_field",
+   "difficulty": "mechanical",
+   "field": "Email",
+   "expected_changes": {
+    "Email": "yuki.miller@hotmail.com"
+   },
+   "acceptable_survivors": [],
+   "rationale": "The correct value ('yuki.miller@hotmail.com') can be restored (mechanical)."
+  }
+ ],
+ "negative_controls": [
+  {
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000001AAA",
+    "001Dq0000000002AAA"
+   ],
+   "note": "Looks similar (same name / same prefix and city) but is a different entity."
+  },
+  {
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000003AAA",
+    "001Dq0000000004AAA"
+   ],
+   "note": "Looks similar (same name / same prefix and city) but is a different entity."
+  },
+  {
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000005AAA",
+    "001Dq0000000006AAA"
+   ],
+   "note": "Looks similar (same name / same prefix and city) but is a different entity."
+  },
+  {
+   "issue_type": "duplicate",
+   "object_type": "Account",
+   "record_ids": [
+    "001Dq0000000007AAA",
+    "001Dq0000000008AAA"
+   ],
+   "note": "Looks similar (same name / same prefix and city) but is a different entity."
+  },
+  {
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000031AAA",
+    "003Dq0000000191AAA"
+   ],
+   "note": "Looks similar (same name / same prefix and city) but is a different entity."
+  },
+  {
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000004AAA",
+    "003Dq0000000330AAA"
+   ],
+   "note": "Looks similar (same name / same prefix and city) but is a different entity."
+  },
+  {
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000248AAA",
+    "003Dq0000000177AAA"
+   ],
+   "note": "Looks similar (same name / same prefix and city) but is a different entity."
+  },
+  {
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000161AAA",
+    "003Dq0000000190AAA"
+   ],
+   "note": "Looks similar (same name / same prefix and city) but is a different entity."
+  },
+  {
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000056AAA",
+    "003Dq0000000003AAA"
+   ],
+   "note": "Looks similar (same name / same prefix and city) but is a different entity."
+  },
+  {
+   "issue_type": "duplicate",
+   "object_type": "Contact",
+   "record_ids": [
+    "003Dq0000000188AAA",
+    "003Dq0000000474AAA"
+   ],
+   "note": "Looks similar (same name / same prefix and city) but is a different entity."
+  }
+ ]
+}

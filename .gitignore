@@ -17,3 +17,7 @@ dist/
 .sfdq/
 *.db
 *.sqlite
+
+# default output of `sfdq eval` (the committed sample lives in docs/)
+/eval-report.md
+/eval-results.json
